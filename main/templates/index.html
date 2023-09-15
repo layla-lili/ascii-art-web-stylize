@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ASCII Art</title>
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+<body class="home-header" >
+    <h1>ASCII Art Generator</h1>
+    <h3>Choose your favorite banner</h3>
+    <div class="box">
+        <div class="form">
+            <form class="ascii-form" method="POST" action="/ascii-art">
+                <!-- <input type="text" name="text" id="text" placeholder="Write your text here" value="{{ .Text }}" required ><br> -->
+                <textarea name="text" id="text" placeholder="Write your text here" required>{{ .Text }}</textarea><br>
+                <select name="banner" id="banner">
+                    <option value="standard"{{ if eq .Banner "standard" }} selected{{ end }}>Standard</option>
+                    <option value="shadow"{{ if eq .Banner "shadow" }} selected{{ end }}>Shadow</option>
+                    <option value="thinkertoy"{{ if eq .Banner "thinkertoy" }} selected{{ end }}>Thinkertoy</option>
+                </select> <br><br>
+                <input type="color" name="textcolor" id="textcolor" value="{{ .TextColor }}" />
+               <button type="submit" name="subBtn" id="subBtn" >Generate ASCII Art</button> <br>
+            </form> 
+            
+        </div>
+    </div>
+
+    {{ if .AsciiArt }}
+    <h2>Generated ASCII Art:</h2>
+    <!-- <pre  >{{ .TextColor }} </pre> -->
+    <pre name="asciiColor" id="asciiColor" style="overflow-x: auto;">{{ .AsciiArt }}</pre>
+    {{ end }}
+
+    <script>
+     // Retrieve the selected color from local storage
+const storedColor = localStorage.getItem('textColor');
+if (storedColor) {
+  const textcolor = document.getElementById('textcolor');
+  textcolor.value = storedColor;
+  const asciiColor = document.getElementById('asciiColor');
+  asciiColor.style.color = storedColor;
+}
+
+// Add event listener to update the color
+const subBtn = document.getElementById('subBtn');
+subBtn.addEventListener('click', function onClick(event) {
+  const textcolor = document.getElementById('textcolor');
+  const asciiColor = document.getElementById('asciiColor');
+  asciiColor.style.color = textcolor.value;
+
+  // Store the selected color in local storage
+  localStorage.setItem('textColor', textcolor.value);
+
+  console.log("textcolor.value: " + textcolor.value);
+});
+    </script>
+</body>
+</html>
