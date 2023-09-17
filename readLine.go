@@ -15,7 +15,7 @@ It takes the file path and line number as arguments and returns the line of text
 func ReadLine(text string, file *os.File) string {
 	result := ""
 	for i := 0; i < 8; i++ {
-		var sb strings.Builder 
+		var sb strings.Builder
 		// Loop through the letters in the text string
 		for _, letter := range text {
 			// Set the file pointer to the beginning of the file
@@ -38,7 +38,7 @@ func ReadLine(text string, file *os.File) string {
 		}
 		//print the final string
 		//fmt.Println(sb.String())
-		result = result +sb.String() + "\n"
+		result = result + sb.String() + "\n"
 	}
 	return result
 }
