@@ -40,11 +40,26 @@ func main() {
 // homeHandler handles GET requests to the root URL ("/").
 // It renders the index.html template.
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+	text = ""
+	banner := ""
+	textxolor := "#EE1A1A"
+	asciiArt := ""
 	if r.URL.Path != "/" {
 		NotFoundHandler(w, r)
 	}
 	if r.Method == http.MethodGet {
-		err := templates.ExecuteTemplate(w, "index.html", nil)
+		err := templates.ExecuteTemplate(w, "index.html", struct {
+			Text     string
+			Banner   string
+			AsciiArt string
+			TextColor string
+
+		}{
+			Text:     text,
+			Banner:   banner,
+			AsciiArt: asciiArt,
+			TextColor: textxolor,
+		})
 		if err != nil {
 			internalServerErrorHandler(w, r)
 			return
@@ -56,11 +71,11 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 // It generates ASCII art based on the input text and selected banner,
 // and renders the index.html template with the generated ASCII art.
 func asciiArtHandler(w http.ResponseWriter, r *http.Request) {
-	textxolor:="#EE1A1A"
+	// textxolor:="#EE1A1A"
 	if r.Method == http.MethodPost {
 		text = r.FormValue("text")
 		banner := r.FormValue("banner")
-		textxolor = r.FormValue("textcolor")
+		textxolor := r.FormValue("textcolor")
 		asciiArt := generateAsciiArt(text, banner, w, r)
 		notENg := false
 		for _, ch := range text {

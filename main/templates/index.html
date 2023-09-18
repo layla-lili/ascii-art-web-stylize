@@ -30,12 +30,15 @@
     {{ if .AsciiArt }}
     <h2>Generated ASCII Art:</h2>
     <!-- <pre  >{{ .TextColor }} </pre> -->
-    <pre name="asciiColor" id="asciiColor" style="overflow-x: auto;">{{ .AsciiArt }}</pre>
+    <pre name="asciiColor" id="asciiColor" style="overflow-x: auto; font-weight: bolder;">{{ .AsciiArt }}</pre>
     {{ end }}
 
     <script>
+        console.log("test","{{ .TextColor }}")
         // Retrieve the selected color from local storage
         const storedColor = localStorage.getItem('textColor');
+          // Store the selected color in local storage
+          localStorage.setItem('textColor', textcolor.value);
         if (storedColor) {
             const textcolor = document.getElementById('textcolor');
             textcolor.value = storedColor;
