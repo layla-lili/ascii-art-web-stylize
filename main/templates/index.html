@@ -38,6 +38,7 @@
    
     {{ if .AsciiArt }}
     <h2>Generated ASCII Art:</h2>
+    <h4>Hover down if the text is not visible 👇</h4>
     <!-- <pre  >{{ .TextColor }} </pre> -->
     <pre name="asciiColor" class="asciiColor" id="asciiColor" style=" overflow-x: auto; font-weight: bolder; color: {{ .TextColor }}"> <div class="Textbox">{{ .AsciiArt }}</div></pre>
     {{ end }}
