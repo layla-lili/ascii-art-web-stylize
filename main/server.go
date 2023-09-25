@@ -28,7 +28,7 @@ func main() {
 	http.HandleFunc("/", homeHandler)
 	// Handler for the "/ascii-art" URL
 	http.HandleFunc("/ascii-art", asciiArtHandler)
-	// Handle not found: 404
+	// Handle not found: 404 page 
 	http.HandleFunc("/404", NotFoundHandler)
 	// Handle Bad Request : 400
 	http.HandleFunc("/400", BadRequestHandler)
